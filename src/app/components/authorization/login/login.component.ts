@@ -25,6 +25,13 @@ export class LoginComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
     });
+
+    this.route.queryParams
+    .subscribe((params: Params) => {
+      if (params['accessDenied']) {
+        alert('sosi');
+      }
+    })
   }
 
   onSubmit(): void {

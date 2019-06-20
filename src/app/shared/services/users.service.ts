@@ -23,6 +23,7 @@ export class UserService {
     // this.users.push(this.admin);
     // localStorage.setItem('users', JSON.stringify(this.users));
     this.users = JSON.parse(localStorage.getItem('users'));
+    localStorage.setItem('isLoggedIn', JSON.stringify(this.isAuthorized));
   }
 
   public isLoggedIn(): boolean {
