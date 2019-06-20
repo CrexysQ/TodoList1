@@ -1,10 +1,12 @@
+import { TaskModule } from '.';
+
 export interface User {
   id?: number;
   email: string;
   name: string;
   password: string;
   isLogin: boolean;
-  tasks?: string;
+  tasks?: TaskModule;
   time?: {
     hours: number;
     minutes: number;

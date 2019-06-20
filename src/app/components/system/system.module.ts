@@ -7,6 +7,7 @@ import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
 import { SystemRoutingModule } from './system-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule ({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FooterComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
     BrowserModule,
     SystemRoutingModule,

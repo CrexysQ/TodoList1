@@ -25,13 +25,6 @@ export class LoginComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
     });
-
-    this.route.queryParams
-    .subscribe((params: Params) => {
-      if (params['accessDenied']) {
-        alert('sosi');
-      }
-    })
   }
 
   onSubmit(): void {
@@ -39,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.users.getUser(formData.email, formData.password);
 
     if (this.users.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/todo']);
     } else {
       console.log('bed');
     }

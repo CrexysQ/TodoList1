@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/users.service';
 
 @Component ({
   selector: 'app-authorization',
@@ -9,9 +10,13 @@ import { Router } from '@angular/router';
 
 export class AuthorizationComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
-    this.router.navigate(['/login']);
+    if (this.userService.isAuthorized) {
+      this.router.navigate(['/todo']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

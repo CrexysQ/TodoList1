@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TaskModule } from 'src/app/shared/models/index';
 import { TimerService } from 'src/app/shared/services/timer.service';
 import { Statuses } from 'src/app/shared/enums/taskStatuses.enum';
+import { User } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/shared/services/users.service';
 
 @Component({
   selector: 'app-task',
@@ -19,18 +21,23 @@ export class TaskComponent {
   public minutes: string;
   public hours: string;
 
-  constructor(public timer: TimerService) {
-    this.tasks = JSON.parse(localStorage.getItem('tasks'));
+  constructor(private timer: TimerService) {
+    this.tasks = JSON.parse(localStorage.getItem('currentUser'));
     this.todoTaskText = '';
     this.btnStatus = Statuses[1];
     this.isTaskStart = false;
 
-    for (const task of this.tasks) {
-      if (task.taskStatus === 3) {
-        this.btnStatus = Statuses[3];
-      } else {
-        task.taskStatus = 0;
+    if (this.task) {
+      for (const task of this.tasks) {
+        if (task.taskStatus === 3) {
+          this.btnStatus = Statuses[3];
+        } else {
+          task.taskStatus = 0;
+        }
       }
+    } else {
+      this.tasks = [];
+      return;
     }
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
