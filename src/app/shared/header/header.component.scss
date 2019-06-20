@@ -1,0 +1,13 @@
+.page-title {
+    color: gray;
+}
+
+.timer {
+    font-size: 25px;
+    max-width: 350px;
+
+    .selected-task {
+        word-break: break-word;
+        text-align: center;
+    }
+}

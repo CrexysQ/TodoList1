@@ -1,0 +1,52 @@
+.page-title {
+    text-align: center;
+}
+
+.todo-text-input {
+    width: 89%;
+    margin-right: 34px;
+    resize: none;
+}
+
+.tasks-wrapper {
+    width: 100%;
+    height: 335px;
+    background: white;
+}
+
+.task-list {
+    max-height: 337px;
+    overflow: auto;
+}
+
+.todo-text {
+    width: 75%;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+
+.checkbox {
+  height: 20px;
+  width: 20px;
+}
+
+.taskTime {
+  width: 10%;
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.start-btn,
+.resolved-btn {
+  width: 90px !important;
+}
+
+.delete-btn {
+    width: 28px;
+    padding: 0;
+}
+
+.todo-checked {
+    text-decoration: line-through;
+}
