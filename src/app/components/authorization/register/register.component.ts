@@ -28,5 +28,4 @@ export class RegisterComponent implements OnInit {
     const formData = this.form.value;
     this.usersService.setUser(formData.email, formData.password, formData.name);
   }
-
 }

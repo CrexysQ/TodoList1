@@ -1,65 +1,60 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../models/user.model';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
-export class UserService {
-  private users: User[] = [];
-  public currentUser: User;
-  public isAuthorized = false;
-  // private admin: User;
-
+export class UserService implements OnDestroy {
   constructor(
     private router: Router,
   ) {
-      // this.admin = {
-      //   email: 'admin@admin.com',
-      //   password: 'Qwerty123',
-      //   name: 'Admin',
-      //   id: 0,
-      //   isLogin: false,
-      //   tasks: {
-      //     status: false,
-      //     text: '',
-      //     taskStatus: 0,
-      //     taskTime: {
-      //       hours: 0,
-      //       minutes: 0
-      //     }
-      //   }
-      // };
-      // this.users.push(this.admin);
-      // localStorage.setItem('users', JSON.stringify(this.users));
-      this.users = JSON.parse(localStorage.getItem('users'));
-      this.isAuthorized = JSON.parse(localStorage.getItem('isLoggedIn'));
+      if ((localStorage.getItem('users')) !== null) {
+        this.users = JSON.parse(localStorage.getItem('users'));
+      } else {
+        this.users = [];
+      }
+
+      if ((localStorage.getItem('currentUser')) !== null) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = this.users[this.currentUser.id];
+      } else if ((sessionStorage.getItem('currentUser')) !== null) {
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+      } else {
+        return;
+      }
   }
+  private users: User[] = [];
+  public currentUser: User;
+  public isAuthorized = false;
 
   public isLoggedIn(): boolean {
     return this.isAuthorized;
   }
 
-  public getCurrentUser() {
-    return this.currentUser;
+  saveUserChanges() {
+    this.users[this.currentUser.id] = this.currentUser;
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    localStorage.setItem('users', JSON.stringify(this.users));
   }
 
-  public getUser(email: string, password: string): void {
-    const users = JSON.parse(localStorage.getItem('users'));
-
-    for (const user in users) {
-      if ((users[user].email === email) && (users[user].password === password)) {
-        this.isAuthorized = true;
-        localStorage.setItem('isLoggedIn', JSON.stringify(this.isAuthorized));
-        this.currentUser = users[user];
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        break;
+  public getUser(email: string, password: string, isRemember: boolean): void {
+    localStorage.getItem('users');
+    for (const user in this.users) {
+      if ( Number(user) < this.users.length) {
+        if ((this.users[user].email === email) && (this.users[user].password === password)) {
+          this.currentUser = this.users[user];
+          if (isRemember) {
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+          } else {
+            sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+            this.currentUser = this.users[user];
+          }
+          break;
+        }
       } else {
-        this.isAuthorized = false;
-        localStorage.setItem('isLoggedIn', JSON.stringify(this.isAuthorized));
+        console.log('Такого пользователя не существует');
       }
     }
-
   }
 
   public setUser(userEmail: string, userPassword: string, userName: string): void {
@@ -69,11 +64,15 @@ export class UserService {
       password: userPassword,
       name: userName,
       id: userId,
-      isLogin: false
+      tasks: []
     };
 
     this.users.push(newUser);
     localStorage.setItem('users', JSON.stringify(this.users));
     this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy(): void {
+    this.saveUserChanges();
   }
 }

@@ -21,13 +21,15 @@ export class TaskComponent {
   public minutes: string;
   public hours: string;
 
-  constructor(private timer: TimerService) {
-    this.tasks = JSON.parse(localStorage.getItem('currentUser'));
+  constructor(private timer: TimerService, private usersService: UserService) {
+    if (localStorage.getItem('currentUser') !== undefined) {
+    }
+    this.tasks = usersService.currentUser.tasks;
     this.todoTaskText = '';
     this.btnStatus = Statuses[1];
     this.isTaskStart = false;
 
-    if (this.task) {
+    if (this.tasks !== undefined) {
       for (const task of this.tasks) {
         if (task.taskStatus === 3) {
           this.btnStatus = Statuses[3];
@@ -36,10 +38,9 @@ export class TaskComponent {
         }
       }
     } else {
-      this.tasks = [];
       return;
     }
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    console.log(this.tasks);
   }
 
   public enter(event: KeyboardEvent): void {
@@ -61,26 +62,29 @@ export class TaskComponent {
           minutes: 0
         }
       });
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.usersService.currentUser.tasks = this.tasks;
     }
     this.todoTaskText = '';
+    this.usersService.saveUserChanges();
   }
 
   public deleteTask(idx: number): void {
     this.tasks.splice(idx, 1);
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    this.usersService.currentUser.tasks = this.tasks;
+    this.usersService.saveUserChanges();
   }
 
   public deleteSelectedTasks(): void {
     for (let i = 0; i < this.tasks.length; i++) {
       if (this.tasks[i].status === true) {
         this.tasks.splice(i, 1);
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.usersService.currentUser.tasks = this.tasks;
         i -= 1;
       } else if (this.tasks[i] === this.tasks[this.tasks.length]) {
         break;
       }
     }
+    this.usersService.saveUserChanges();
   }
 
   public onChange(event: Event, idx: number): void {
@@ -105,10 +109,10 @@ export class TaskComponent {
     if (this.prevTask >= 0) {
       if (this.tasks[this.prevTask].taskStatus === 3) {
         this.tasks[this.prevTask].taskStatus = 3;
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.usersService.currentUser.tasks = this.tasks;
       } else {
         this.tasks[this.prevTask].taskStatus = 0;
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.usersService.currentUser.tasks = this.tasks;
       }
     }
 
@@ -118,19 +122,19 @@ export class TaskComponent {
     this.prevTask = taskId;
     this.timer.getTaskStatus().subscribe(value => {
       this.tasks[this.currentTaskId].taskStatus = value;
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.usersService.currentUser.tasks = this.tasks;
     });
 
     this.timer.getTaskTimerMinutes().subscribe(value => {
       this.minutes = ('0' + value).slice(-2);
       this.tasks[this.currentTaskId].taskTime.minutes = value;
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.usersService.currentUser.tasks = this.tasks;
     });
 
     this.timer.getTaskTimerHours().subscribe(value => {
       this.hours = ('0' + value).slice(-2);
       this.tasks[this.currentTaskId].taskTime.hours = value;
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      this.usersService.currentUser.tasks = this.tasks;
     });
   }
 }

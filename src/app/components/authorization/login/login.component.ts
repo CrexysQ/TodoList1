@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   public currentUser: User;
+  private remember: boolean = false;
 
   constructor(
     private users: UserService,
@@ -22,19 +23,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
     });
+  }
+
+  rememberMe() {
+    this.remember = !this.remember;
   }
 
   onSubmit(): void {
     const formData = this.form.value;
-    this.users.getUser(formData.email, formData.password);
+    this.users.getUser(formData.email, formData.password, this.remember);
 
-    if (this.users.isLoggedIn()) {
+    if (this.users.currentUser !== undefined) {
       this.router.navigate(['/todo']);
-    } else {
-      console.log('bed');
     }
   }
 

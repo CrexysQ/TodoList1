@@ -5,8 +5,7 @@ export interface User {
   email: string;
   name: string;
   password: string;
-  isLogin: boolean;
-  tasks?: TaskModule;
+  tasks?: TaskModule[];
   time?: {
     hours: number;
     minutes: number;

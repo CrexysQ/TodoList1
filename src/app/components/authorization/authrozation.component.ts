@@ -13,7 +13,7 @@ export class AuthorizationComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
-    if (this.userService.isAuthorized) {
+    if (this.userService.currentUser != null) {
       this.router.navigate(['/todo']);
     } else {
       this.router.navigate(['/login']);
