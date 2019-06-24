@@ -6,6 +6,7 @@ export interface User {
   name: string;
   password: string;
   tasks?: TaskModule[];
+  theme?: string;
   time?: {
     hours: number;
     minutes: number;

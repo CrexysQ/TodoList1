@@ -7,5 +7,5 @@ import { SetThemeService } from 'src/app/shared/services/set-theme.serivice';
 })
 
 export class SystemComponent  {
-  constructor(public service: SetThemeService) { }
+  constructor(public themeService: SetThemeService) { }
 }

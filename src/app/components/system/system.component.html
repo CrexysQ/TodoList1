@@ -1,6 +1,6 @@
-<div [ngClass]="{ 'darkTheme': service.darkTheme,
-                  'redTheme': service.redTheme,
-                  'lightTheme': service.lightTheme}"
+<div [ngClass]="{ 'darkTheme': themeService.darkTheme,
+                  'redTheme': themeService.redTheme,
+                  'lightTheme': themeService.lightTheme}"
 >
   <app-header></app-header>
   <app-task></app-task>

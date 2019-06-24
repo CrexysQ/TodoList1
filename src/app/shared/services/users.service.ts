@@ -64,7 +64,8 @@ export class UserService implements OnDestroy {
       password: userPassword,
       name: userName,
       id: userId,
-      tasks: []
+      tasks: [],
+      theme: ''
     };
 
     this.users.push(newUser);
