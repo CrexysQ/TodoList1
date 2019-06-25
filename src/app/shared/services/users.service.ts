@@ -33,7 +33,11 @@ export class UserService implements OnDestroy {
 
   saveUserChanges() {
     this.users[this.currentUser.id] = this.currentUser;
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    if (localStorage.getItem('currentUser') !== null) {
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    } else if (sessionStorage.getItem('currentUser') !== null) {
+      sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    }
     localStorage.setItem('users', JSON.stringify(this.users));
   }
 
@@ -52,7 +56,7 @@ export class UserService implements OnDestroy {
           break;
         }
       } else {
-        console.log('Такого пользователя не существует');
+        alert('Такого пользователя не существует');
       }
     }
   }

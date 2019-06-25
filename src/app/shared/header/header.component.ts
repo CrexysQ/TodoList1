@@ -16,11 +16,11 @@ export class HeaderComponent {
   public hours: string;
   public minutes: string;
 
-  constructor(public service: SetThemeService,
+  constructor(public themeService: SetThemeService,
               public timer: TimerService,
               private userService: UserService,
               private router: Router) {
-    this.choice = localStorage.getItem('theme');
+    this.choice = this.themeService.theme;
     this.timer.getTaskName().subscribe((value) => {
       this.task = value;
     });
@@ -35,7 +35,7 @@ export class HeaderComponent {
   }
 
   public onChange(e: string) {
-    this.service.setTheme(e);
+    this.themeService.setTheme(e);
  }
 
  public logOut(): void {
