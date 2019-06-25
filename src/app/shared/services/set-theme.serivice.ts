@@ -9,13 +9,20 @@ export class SetThemeService {
   public theme = '';
 
   constructor(private userService: UserService) {
-    this.theme = this.userService.currentUser.theme;
+    if (userService.currentUser !== undefined) {
+      this.theme = userService.currentUser.theme;
+    } else {
+      return;
+    }
     this.setTheme(this.theme);
   }
 
   getThemeSettings() {
-    this.theme = this.userService.currentUser.theme;
-    this.setTheme(this.theme);
+    if (this.userService.currentUser !== null) {
+      this.theme = this.userService.currentUser.theme;
+    } else {
+      return;
+    }
   }
 
   public setTheme(theme: string): void {

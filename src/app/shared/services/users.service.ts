@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService implements OnDestroy {
+  private users: User[] = [];
+  public currentUser: User;
+  public isAuthorized = false;
+
   constructor(
     private router: Router,
   ) {
@@ -23,9 +27,6 @@ export class UserService implements OnDestroy {
         return;
       }
   }
-  private users: User[] = [];
-  public currentUser: User;
-  public isAuthorized = false;
 
   public isLoggedIn(): boolean {
     return this.isAuthorized;
@@ -69,7 +70,11 @@ export class UserService implements OnDestroy {
       name: userName,
       id: userId,
       tasks: [],
-      theme: ''
+      theme: '',
+      time: {
+        hours: 0,
+        minutes: 0
+      }
     };
 
     this.users.push(newUser);

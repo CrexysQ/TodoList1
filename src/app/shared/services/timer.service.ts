@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Time } from '../models/time';
+import { UserService } from './users.service';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class TimerService {
   public behaviorMinutes: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public TaskHours: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public TaskMinutes: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  public time: Time[] = [];
+  public time: Time;
   public seconds: number;
   public minutes: number;
   public hours: number;
@@ -24,12 +25,17 @@ export class TimerService {
   public timeCounter: any;
   public taskTimeCounter: any;
 
-  constructor() {
-    this.time = JSON.parse(localStorage.getItem('time'));
+  constructor(private userSevice: UserService) {
+    if (userSevice.currentUser !== null) {
+      this.time = userSevice.currentUser.time;
+    } else {
+      return;
+    }
+
     if (this.time !== null) {
       this.seconds = 0;
-      this.minutes = this.time[0].minutes;
-      this.hours = this.time[0].hours;
+      this.minutes = userSevice.currentUser.time.minutes;
+      this.hours = userSevice.currentUser.time.hours;
       this.taskSeconds = this.seconds;
       this.taskMinutes = 0;
       this.taskHours = 0;
@@ -44,10 +50,42 @@ export class TimerService {
       this.taskHours = 0;
       this.behaviorMinutes.next(this.minutes);
       this.behaviorHours.next(this.hours);
-      this.time = [{
+      this.time = {
         hours: 0,
         minutes: 0
-      }]
+      };
+    }
+  }
+
+  getTime() {
+    if (this.userSevice.currentUser !== null) {
+      this.time = this.userSevice.currentUser.time;
+    } else {
+      return;
+    }
+
+    if (this.time !== null) {
+      this.seconds = 0;
+      this.minutes = this.userSevice.currentUser.time.hours;
+      this.hours = this.userSevice.currentUser.time.hours;
+      this.taskSeconds = this.seconds;
+      this.taskMinutes = 0;
+      this.taskHours = 0;
+      this.behaviorMinutes.next(this.minutes);
+      this.behaviorHours.next(this.hours);
+    } else {
+      this.seconds = 0;
+      this.minutes = 0;
+      this.hours = 0;
+      this.taskSeconds = this.seconds;
+      this.taskMinutes = 0;
+      this.taskHours = 0;
+      this.behaviorMinutes.next(this.minutes);
+      this.behaviorHours.next(this.hours);
+      this.time = {
+        hours: 0,
+        minutes: 0
+      };
     }
   }
 
@@ -112,10 +150,10 @@ export class TimerService {
       clearInterval(this.timeCounter);
       clearInterval(this.taskTimeCounter);
     }
-    debugger;
-    this.time[0].hours = this.hours;
-    this.time[0].minutes = this.minutes;
-    localStorage.setItem('time', JSON.stringify(this.time));
+    this.time.hours = this.hours;
+    this.time.minutes = this.minutes;
+    this.userSevice.currentUser.time = this.time;
+    this.userSevice.saveUserChanges();
   }
 
   public startTaskTimer(taskStatus: number, hours: number, minutes: number): void {
@@ -124,6 +162,7 @@ export class TimerService {
     this.TaskMinutes.next(minutes);
     this.TaskHours.next(hours);
     clearInterval(this.taskTimeCounter);
+
     if (taskStatus === 0) {
       this.taskTimeCounter = setInterval(() => {
         this.taskSeconds = this.taskSeconds + 1;

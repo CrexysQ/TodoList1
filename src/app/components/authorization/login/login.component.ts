@@ -4,6 +4,7 @@ import { UserService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/models/user.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SetThemeService } from 'src/app/shared/services/set-theme.serivice';
+import { TimerService } from 'src/app/shared/services/timer.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private users: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private themeService: SetThemeService
+    private themeService: SetThemeService,
+    private timerService: TimerService
     ) { }
 
   ngOnInit() {
@@ -42,5 +44,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/todo']);
     }
     this.themeService.getThemeSettings();
+    this.timerService.getTime();
   }
 }

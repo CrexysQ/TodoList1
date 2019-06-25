@@ -136,5 +136,7 @@ export class TaskComponent {
       this.tasks[this.currentTaskId].taskTime.hours = value;
       this.usersService.currentUser.tasks = this.tasks;
     });
+
+    this.usersService.saveUserChanges();
   }
 }

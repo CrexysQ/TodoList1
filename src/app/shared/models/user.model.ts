@@ -1,4 +1,5 @@
 import { TaskModule } from '.';
+import { Time } from './time';
 
 export interface User {
   id?: number;
@@ -7,12 +8,5 @@ export interface User {
   password: string;
   tasks?: TaskModule[];
   theme?: string;
-  time?: {
-    hours: number;
-    minutes: number;
-  };
-  taskTime?: {
-    hours: number;
-    minutes: number;
-  };
+  time?: Time;
 }
