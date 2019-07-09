@@ -1,4 +1,4 @@
-import { TaskModule } from '.';
+import { Task } from '.';
 import { Time } from './time';
 
 export interface User {
@@ -6,7 +6,7 @@ export interface User {
   email: string;
   name: string;
   password: string;
-  tasks?: TaskModule[];
+  tasks?: Task[];
   theme?: string;
   time?: Time;
 }

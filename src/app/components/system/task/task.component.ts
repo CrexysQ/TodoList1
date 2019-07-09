@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TaskModule } from 'src/app/shared/models/index';
+import { Task } from 'src/app/shared/models/index';
 import { TimerService } from 'src/app/shared/services/timer.service';
 import { Statuses } from 'src/app/shared/enums/taskStatuses.enum';
 import { User } from 'src/app/shared/models/user.model';
@@ -11,8 +11,9 @@ import { UserService } from 'src/app/shared/services/users.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  public todoTaskText: string;
-  public tasks: TaskModule[] = [];
+  public todoTaskName: string;
+  public todoTaskDesc: string;
+  public tasks: Task[] = [];
   public task: string;
   public btnStatus: string;
   public isTaskStart: boolean;
@@ -25,7 +26,8 @@ export class TaskComponent {
     if (localStorage.getItem('currentUser') !== undefined) {
     }
     this.tasks = usersService.currentUser.tasks;
-    this.todoTaskText = '';
+    this.todoTaskName = '';
+    this.todoTaskDesc = '';
     this.btnStatus = Statuses[1];
     this.isTaskStart = false;
 
@@ -40,7 +42,6 @@ export class TaskComponent {
     } else {
       return;
     }
-    console.log(this.tasks);
   }
 
   public enter(event: KeyboardEvent): void {
@@ -50,12 +51,17 @@ export class TaskComponent {
   }
 
   public addTask(): void {
-    if (this.todoTaskText.trim() === '') {
-      alert('Enter the task text');
+    if (this.todoTaskDesc.trim() === '' && this.todoTaskName.trim() === '') {
+      alert('Fill the task');
+    } else if (this.todoTaskDesc.trim() === '') {
+      alert('Fill the task description')
+    } else if (this.todoTaskName.trim() === '') {
+      alert('Fill the task Name');
     } else {
       this.tasks.push({
         status: false,
-        text: this.todoTaskText,
+        name: this.todoTaskName,
+        description: this.todoTaskDesc,
         taskStatus: 0,
         taskTime: {
           hours: 0,
@@ -64,7 +70,8 @@ export class TaskComponent {
       });
       this.usersService.currentUser.tasks = this.tasks;
     }
-    this.todoTaskText = '';
+    this.todoTaskDesc = '';
+    this.todoTaskName = '';
     this.usersService.saveUserChanges();
   }
 

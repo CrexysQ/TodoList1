@@ -3,11 +3,26 @@ import { SetThemeService } from 'src/app/shared/services/set-theme.serivice';
 import { TimerService } from 'src/app/shared/services/timer.service';
 import { UserService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('dropDown', [
+      state('hidden', style({
+        height: '0',
+        border: '1px solid transparent',
+      })),
+      state('opened', style({
+        border: '1px solid rgba(128, 128, 128, 0.521)',
+        height: '130px',
+      })),
+      transition('hidden => opened', animate(200)),
+      transition('opened => hidden', animate(200))
+    ])
+  ]
 })
 
 export class HeaderComponent {
@@ -15,6 +30,7 @@ export class HeaderComponent {
   public task: string;
   public hours: string;
   public minutes: string;
+  public dropDownState: string = 'hidden';
 
   constructor(public themeService: SetThemeService,
               public timer: TimerService,
@@ -36,6 +52,7 @@ export class HeaderComponent {
 
   public onChange(e: string) {
     this.themeService.setTheme(e);
+    this.choice = e;
  }
 
  public logOut(): void {
@@ -43,5 +60,12 @@ export class HeaderComponent {
   localStorage.removeItem('currentUser');
   sessionStorage.removeItem('currentUser');
   this.router.navigate(['/login']);
+ }
+
+ dropDownOpen(){
+   this.dropDownState = 'opened';
+ }
+ dropDownHidden() {
+  this.dropDownState = 'hidden';
  }
 }

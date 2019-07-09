@@ -1,6 +1,7 @@
-export interface TaskModule {
+export interface Task {
     status: boolean;
-    text: string;
+    name: string;
+    description: string;
     taskStatus: number;
     taskTime: {
       hours: number;

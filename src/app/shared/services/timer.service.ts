@@ -26,13 +26,13 @@ export class TimerService {
   public taskTimeCounter: any;
 
   constructor(private userSevice: UserService) {
-    if (userSevice.currentUser !== null) {
+    if (userSevice.currentUser !== undefined) {
       this.time = userSevice.currentUser.time;
     } else {
       return;
     }
 
-    if (this.time !== null) {
+    if (this.time !== undefined) {
       this.seconds = 0;
       this.minutes = userSevice.currentUser.time.minutes;
       this.hours = userSevice.currentUser.time.hours;
@@ -58,7 +58,7 @@ export class TimerService {
   }
 
   getTime() {
-    if (this.userSevice.currentUser !== null) {
+    if (this.userSevice.currentUser !== undefined) {
       this.time = this.userSevice.currentUser.time;
     } else {
       return;
