@@ -3,6 +3,7 @@ export interface Task {
     name: string;
     description: string;
     taskStatus: number;
+    taskDate: Date;
     taskTime: {
       hours: number;
       minutes: number;

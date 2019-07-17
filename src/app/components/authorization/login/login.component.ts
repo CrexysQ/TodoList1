@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.users.getUser(formData.email, formData.password, this.remember);
 
     if (this.users.currentUser !== undefined) {
-      this.router.navigate(['/todo']);
+      this.router.navigate(['system/todo']);
     }
     this.themeService.getThemeSettings();
     this.timerService.getTime();

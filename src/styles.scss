@@ -1,6 +1,8 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 .darkTheme {
-    color: gray;           
-    
+    color: gray;
+
     .jumbotron {
         background: rgb(31, 31, 31);
         border-radius: 0;
@@ -10,12 +12,12 @@
         background-color: #9c9c9c;
         color: white;
 
-        
+
         &:focus {
             box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.5);
             border-color: #dc3545;
         }
-        
+
         &:not(:disabled):not(.disabled):active:focus {
             box-shadow: 0 0 0 0.2rem rgba(220, 53, 70, 0.774);
         }
@@ -38,7 +40,7 @@
             color: white;
         }
     }
-    
+
     .tasksBoard {
         background-color: rgb(63, 63, 63);
         color: rgb(185, 184, 184);
@@ -55,8 +57,8 @@
 }
 
 .redTheme {
-    color: white;           
-    
+    color: white;
+
     .jumbotron {
         background: #dc3545;
         border-radius: 0;
@@ -71,7 +73,7 @@
         background-color: #9c9c9c;
         color: white;
 
-        
+
         &:focus,
         &:not(:disabled):not(.disabled):active:focus {
             box-shadow: 0 0 0 0.2rem rgba(36, 36, 36, 0.5);
@@ -96,10 +98,10 @@
             color: white;
         }
     }
-    
+
     .tasksBoard {
         background-color: rgb(63, 63, 63);
-        color: rgb(185, 184, 184);  
+        color: rgb(185, 184, 184);
 
         .jumbotron {
             border-radius: 0.25rem
@@ -111,4 +113,11 @@
         }
     }
 
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ngx-datepicker-calendar-container.ngx-datepicker-position-bottom-right.ng-star-inserted {
+  z-index: 1;
 }

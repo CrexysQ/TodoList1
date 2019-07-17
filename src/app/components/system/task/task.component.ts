@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Task } from 'src/app/shared/models/index';
 import { TimerService } from 'src/app/shared/services/timer.service';
 import { Statuses } from 'src/app/shared/enums/taskStatuses.enum';
-import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/users.service';
+import { DatepickerOptions } from 'ng2-datepicker';
 
 @Component({
   selector: 'app-task',
@@ -15,6 +15,7 @@ export class TaskComponent {
   public todoTaskDesc: string;
   public tasks: Task[] = [];
   public task: string;
+  public date: Date = new Date(Date.now());
   public btnStatus: string;
   public isTaskStart: boolean;
   private prevTask: number;
@@ -54,7 +55,7 @@ export class TaskComponent {
     if (this.todoTaskDesc.trim() === '' && this.todoTaskName.trim() === '') {
       alert('Fill the task');
     } else if (this.todoTaskDesc.trim() === '') {
-      alert('Fill the task description')
+      alert('Fill the task description');
     } else if (this.todoTaskName.trim() === '') {
       alert('Fill the task Name');
     } else {
@@ -63,6 +64,7 @@ export class TaskComponent {
         name: this.todoTaskName,
         description: this.todoTaskDesc,
         taskStatus: 0,
+        taskDate: this.date,
         taskTime: {
           hours: 0,
           minutes: 0
@@ -70,6 +72,7 @@ export class TaskComponent {
       });
       this.usersService.currentUser.tasks = this.tasks;
     }
+
     this.todoTaskDesc = '';
     this.todoTaskName = '';
     this.usersService.saveUserChanges();

@@ -14,7 +14,7 @@ export class AuthorizationComponent implements OnInit {
 
   ngOnInit() {
     if (this.userService.currentUser != null) {
-      this.router.navigate(['/todo']);
+      this.router.navigate(['system/todo']);
     } else {
       this.router.navigate(['/login']);
     }

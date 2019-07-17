@@ -28,8 +28,12 @@ List of themes end
     <h5 class="current-page">
       HOME
     </h5>
-    <a class="header-nav-link" href="#"> HOME </a>
-    <a class="header-nav-link" href="#"> CALENDAR </a>
+    <a class="header-nav-link"
+      [routerLink]="['todo']"
+      routerLinkActive="router-link-active"> HOME </a>
+    <a class="header-nav-link"
+      [routerLink]="['calendar']"
+      routerLinkActive="router-link-active"> CALENDAR </a>
     <span class="header-nav-link theme-picker position-relative" (mouseenter)="dropDownOpen()" (mouseleave)="dropDownHidden()" >
       PICK A THEME
       <div class="theme-dropDown" [@dropDown]="dropDownState">
