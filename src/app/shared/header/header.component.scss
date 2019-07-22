@@ -1,58 +1,18 @@
-.page-title {
-    color: gray;
-}
-
-.timer {
-    font-size: 25px;
-    max-width: 350px;
-
-    .selected-task {
-        word-break: break-word;
-        text-align: center;
-    }
-}
-
 header {
   display: flex;
   align-items: center;
-  padding: 25px 25px;
-  box-shadow: 0px -12px 20px 10px grey;
+  max-height: 60px;
 
-  nav {
-    display: flex;
-    align-items: center;
+  .theme-picker {
+    border-bottom: 3px solid transparent;
+    margin: 0;
+    height: 100%;
 
-    .current-page {
-      font-size: 25px;
-      margin-right: 35px;
-      color: gray;
-    }
-
-    .header-nav-link {
-      margin-right: 15px;
-      font-size: 20px;
-      text-decoration: none;
+    &:hover {
       border-bottom: 3px solid transparent;
-      color: rgb(66, 150, 230);
-      cursor: pointer;
-
-      &:hover {
-        border-bottom: 3px solid rgb(66, 150, 230);
-      }
-    }
-
-    .theme-picker {
-      border-bottom: 3px solid transparent;
-      margin: 0;
-
-      &:hover {
-        border-bottom: 3px solid transparent;
-      }
     }
 
     .theme-dropDown {
-      display: flex;
-      flex-direction: column;
       position: absolute;
       width: 100%;
       background: white;
@@ -60,10 +20,12 @@ header {
       border-radius: 5px;
 
       .theme {
+        display: block;
         margin: 0;
         padding-left: 10px;
         border-left: 2px solid transparent;
         border-bottom: none;
+        cursor: pointer;
 
         &:hover {
           border-left: 2px solid rgb(66, 150, 230);
@@ -72,11 +34,12 @@ header {
       }
 
       .current-theme {
+        display: block;
         margin: 0;
         padding-left: 10px;
         opacity: 0.5;
-        cursor: default;
         border-bottom: 1px solid rgba(128, 128, 128, 0.521);
+        cursor: default;
 
         &:hover {
           color: rgba(0, 119, 255, 0.8);
@@ -104,16 +67,20 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
 
     .task-time {
       display: flex;
       font-size: 20px;
+
+      p {
+        margin: 0;
+      }
     }
 
     .task-name {
       color: gray;
       font-size: 16px;
+      margin: 0;
     }
   }
 }

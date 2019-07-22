@@ -1,21 +1,21 @@
-.page-title {
-    text-align: center;
+.task-container {
+  width: 100%;
 }
-
-.container {
-  min-height: 594px;
-}
-
-.todo-text-input {
-    width: 89%;
-    margin-right: 34px;
-    resize: none;
+.task-input-wrapper {
+  input {
+    width: 100%;
+  }
+  .todo-text-input {
+      width: 89%;
+      margin-right: 34px;
+      resize: none;
+  }
 }
 
 .tasks-wrapper {
   display: grid;
   padding: 0;
-  grid-template-columns: repeat(auto-fit, minmax(267px, 255px));
+  grid-template-columns: repeat(auto-fit, minmax(255px, 265px));
   grid-gap: 1em;
   justify-content: center;
   width: 100%;

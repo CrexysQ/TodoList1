@@ -1,58 +1,25 @@
-<!-- <header class="jumbotron pt-5 pb-5 mb-0 d-flex justify-content-between aling-content-center">
-List of themes start
-  <div class="w-25">
-    <select class="form-control w-25"
-            placeholder="pick a color theme"
-            name="themePicker"
-            [(ngModel)]="choice"
-            (change)="onChange($event.target.value)">
-      <option value="Dark"> Dark </option>
-      <option value="Light"> Light </option>
-      <option value="Red"> Red </option>
-    </select>
-  </div>
-List of themes end
-  <div class="timer">
-    <div class="d-flex aling-item-center justify-content-center">
-      <p class="hours"> {{ hours }} </p>
-      <span> : </span>
-      <p class="minutes"> {{ minutes }} </p>
-    </div>
-    <p class="selected-task">{{ task }}</p>
-  </div>
-  <button class="btn btn-primary" (click)="logOut()">LogOut</button>
-</header> -->
-
 <header>
-  <nav class="header-navigation">
-    <h5 class="current-page">
-      HOME
-    </h5>
-    <a class="header-nav-link"
-      [routerLink]="['todo']"
-      routerLinkActive="router-link-active"> HOME </a>
-    <a class="header-nav-link"
-      [routerLink]="['calendar']"
-      routerLinkActive="router-link-active"> CALENDAR </a>
-    <span class="header-nav-link theme-picker position-relative" (mouseenter)="dropDownOpen()" (mouseleave)="dropDownHidden()" >
-      PICK A THEME
-      <div class="theme-dropDown" [@dropDown]="dropDownState">
-        <span class="header-nav-link current-theme">{{ choice }}</span>
-        <span class="header-nav-link theme" (click)="onChange('Light')"> Light </span>
-        <span class="header-nav-link theme" (click)="onChange('Dark')"> Dark </span>
-        <span class="header-nav-link theme" (click)="onChange('Red')"> Red </span>
+    <div class="pl-0 col-md-4">
+      <div class="active-task card">
+      <div class="task-time">
+          <p class="hours"> {{ hours }} </p>
+          <span> : </span>
+          <p class="minutes"> {{ minutes }} </p>
       </div>
-    </span>
-  </nav>
-
-  <div class="active-task">
-    <div class="task-time">
-        <p class="hours"> {{ hours }} </p>
-        <span> : </span>
-        <p class="minutes"> {{ minutes }} </p>
+      <h5 class="task-name">{{ task }}</h5>
     </div>
-    <h5 class="task-name">{{ task }}</h5>
-  </div>
+    </div>
+    <div class="col-md-2 p-0">
+      <div class="theme-picker position-relative card" (mouseenter)="dropDownOpen()" (mouseleave)="dropDownHidden()" >
+        <span> PICK A THEME </span>
+        <div class="theme-dropDown" [@dropDown]="dropDownState">
+          <span class="current-theme">{{ choice }}</span>
+          <span class="theme" (click)="onChange('Light')"> Light </span>
+          <span class="theme" (click)="onChange('Dark')"> Dark </span>
+          <span class="theme" (click)="onChange('Red')"> Red </span>
+        </div>
+      </div>
+    </div>
 
   <button class="logout-btn" (click)="logOut()">LogOut</button>
 </header>

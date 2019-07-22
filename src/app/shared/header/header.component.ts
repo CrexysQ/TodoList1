@@ -9,6 +9,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+
   animations: [
     trigger('dropDown', [
       state('hidden', style({
@@ -62,7 +63,7 @@ export class HeaderComponent {
   this.router.navigate(['/login']);
  }
 
- dropDownOpen(){
+ dropDownOpen() {
    this.dropDownState = 'opened';
  }
  dropDownHidden() {

@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Task } from 'src/app/shared/models/index';
 import { TimerService } from 'src/app/shared/services/timer.service';
 import { Statuses } from 'src/app/shared/enums/taskStatuses.enum';
 import { UserService } from 'src/app/shared/services/users.service';
-import { DatepickerOptions } from 'ng2-datepicker';
 
 @Component({
   selector: 'app-task',
@@ -147,6 +146,10 @@ export class TaskComponent {
       this.usersService.currentUser.tasks = this.tasks;
     });
 
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  BeforeUnloadEvent() {
     this.usersService.saveUserChanges();
   }
 }

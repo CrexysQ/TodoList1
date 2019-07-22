@@ -1,5 +1,19 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
+@font-face {
+  font-family: "Helavitca";
+  src: url(../src/assets/fonts/Helavitca.otf)
+}
+
+// variables
+$nav-font: Helavitca;
+
+body {
+  background: url(../src/assets/bg.png) 50% 50% no-repeat;
+  background-size: cover;
+}
+
+
 .darkTheme {
     color: gray;
 

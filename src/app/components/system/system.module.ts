@@ -1,8 +1,9 @@
 import { TaskComponent } from './task/task.component';
 import { SystemComponent } from './system.component';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { FooterComponent } from 'src/app/shared/footer/footer.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AsideNavComponent } from 'src/app/shared/aside-nav/aside-nav.component';
+import { RightAsideComponent } from 'src/app/shared/right-aside/right-aside.component';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,8 +21,9 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     TaskComponent,
     SystemComponent,
     HeaderComponent,
-    FooterComponent,
-    CalendarComponent
+    CalendarComponent,
+    AsideNavComponent,
+    RightAsideComponent,
   ],
   imports: [
     CommonModule,
