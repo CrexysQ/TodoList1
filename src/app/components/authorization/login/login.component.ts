@@ -13,7 +13,9 @@ import { TimerService } from 'src/app/shared/services/timer.service';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
+  public form: FormGroup;
+  public email: FormControl;
+  public password: FormControl
   public currentUser: User;
   private remember: boolean = false;
 
@@ -26,13 +28,24 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.password = new FormControl(null, [Validators.required, Validators.minLength(8)]),
+
     this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      email: this.email,
+      password: this.password
     });
   }
 
-  rememberMe() {
+  getEmailErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter an Email' : this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  getPassErrorMessage() {
+    return this.password.hasError('required') ? 'You must enter a Password' : this.password.hasError('minlength') ? 'Your password must contain min 8 symbols' : '';
+  }
+
+  rememberMe() {    
     this.remember = !this.remember;
   }
 

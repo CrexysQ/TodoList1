@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form d-flex flex-column justify-content-between p-3">
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form d-flex flex-column justify-content-between p-3">
     <h1 class="text-primary"> Login </h1>
     <div>
         <div class="form-group">
@@ -38,12 +38,33 @@
         <button class="btn btn-primary" [disabled]="form.invalid" type="submit"> Login </button>
         <a [routerLink]="['/registration']" routerLinkActive="router-link-active"> Do not have an account? </a>
     </div>
-</form>
+</form> -->
 
 <mat-card>
-    <mat-card-header>
+    <mat-card-header class="w-100">
         <mat-card-title>
             Login
         </mat-card-title>
+        <mat-card-subtitle [routerLink]="['/registration']" routerLinkActive="router-link-active">
+            Register
+        </mat-card-subtitle>
     </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form d-flex flex-column justify-content-center p-3">
+            <mat-form-field>
+                <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
+                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
+                <mat-error *ngIf="email.invalid">{{getPassErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-checkbox (change)="rememberMe()">Remember me</mat-checkbox>
+
+            <button mat-fab class="login-button" [disabled]="form.invalid" type="submit" color="primary">Login</button>
+        </form>
+    </mat-card-content>
 </mat-card>

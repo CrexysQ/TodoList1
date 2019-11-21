@@ -9,7 +9,10 @@ import { UserService } from 'src/app/shared/services/users.service';
 })
 export class RegisterComponent implements OnInit {
 
-  form: FormGroup;
+  public form: FormGroup;
+  public name: FormControl;
+  public email: FormControl;
+  public password: FormControl
 
   constructor(
     private usersService: UserService,
@@ -17,14 +20,30 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.name = new FormControl(null, [Validators.required]),
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.password = new FormControl(null, [Validators.required, Validators.minLength(8)]),
+
     this.form = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      name: this.name,
+      email: this.email,
+      password: this.password,
     });
   }
 
-  onSubmit() {
+  public getNameErrorMessage(): string {
+    return this.email.hasError('required') ? 'You must enter a Name' : '';
+  }
+
+  public getEmailErrorMessage(): string {
+    return this.email.hasError('required') ? 'You must enter an Email' : this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  public getPassErrorMessage(): string {
+    return this.password.hasError('required') ? 'You must enter a Password' : this.password.hasError('minlength') ? 'Your password must contain min 8 symbols' : '';
+  }
+
+  onSubmit(): void {
     const formData = this.form.value;
     this.usersService.setUser(formData.email, formData.password, formData.name);
   }
