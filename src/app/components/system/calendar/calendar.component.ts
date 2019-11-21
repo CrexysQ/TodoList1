@@ -10,6 +10,7 @@ import { UserService } from 'src/app/shared/services/users.service';
 export class CalendarComponent implements OnInit {
 
   public viewDate: Date = new Date();
+  public view: Date = new Date();
   public events: CalendarEvent[] = [];
   public taskStartDate: Date = new Date();
 

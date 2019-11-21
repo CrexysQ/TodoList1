@@ -1,50 +1,49 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form d-flex flex-column justify-content-between p-3">
-  <h1 class="text-primary"> Login </h1>
-  <div>
-    <div class="form-group">
-      <label for="name">Your Email</label>
-      <input class="form-control"
-             [ngClass]="{'border-warning': form.get('email').touched && form.get('email').invalid && form.get('email')['errors']['required'],
+    <h1 class="text-primary"> Login </h1>
+    <div>
+        <div class="form-group">
+            <label for="name">Your Email</label>
+            <input class="form-control"
+                [ngClass]="{'border-warning': form.get('email').touched && form.get('email').invalid && form.get('email')['errors']['required'],
                          'border-danger': form.get('email').touched && form.get('email').invalid && form.get('email')['errors']['email']}"
-             type="email"
-             name="email"
-             id="email"
-             formControlName="email"
-             placeholder="Your Email">
-      <small class="validation error"
-             *ngIf="form.get('email').touched && form.get('email').invalid"
-      >
-        <span class="text-danger" *ngIf="form.get('email')['errors']['email']"> Enter correct email address </span>
-        <span class="text-warning" *ngIf="form.get('email')['errors']['required']"> Email can't be empty </span>
-      </small>
-    </div>
+                type="email" name="email" id="email" formControlName="email" placeholder="Your Email">
+            <small class="validation error" *ngIf="form.get('email').touched && form.get('email').invalid">
+                <span class="text-danger" *ngIf="form.get('email')['errors']['email']"> Enter correct email address
+                </span>
+                <span class="text-warning" *ngIf="form.get('email')['errors']['required']"> Email can't be empty </span>
+            </small>
+        </div>
 
-    <div class="form-group">
-      <label for="name">Your Password</label>
-      <input class="form-control"
-            [ngClass]="{'border-warning': form.get('password').touched && form.get('password').invalid && form.get('password')['errors']['required'],
+        <div class="form-group">
+            <label for="name">Your Password</label>
+            <input class="form-control"
+                [ngClass]="{'border-warning': form.get('password').touched && form.get('password').invalid && form.get('password')['errors']['required'],
                               'border-danger': form.get('password').touched && form.get('password').invalid && form.get('password')['errors']['minlength']}"
-            type="password"
-            name="password"
-            id="password"
-            formControlName="password"
-            placeholder="Your password">
-    <small class="validation error"
-          *ngIf="form.get('password').touched && form.get('password').invalid"
-     >
-       <span class="text-danger" *ngIf=" form.get('password')['errors']['minlength']"> Must containt 8 symbols </span>
-       <span class="text-warning" *ngIf="form.get('password')['errors']['required']"> Password can't be empty </span>
-     </small>
+                type="password" name="password" id="password" formControlName="password" placeholder="Your password">
+            <small class="validation error" *ngIf="form.get('password').touched && form.get('password').invalid">
+                <span class="text-danger" *ngIf=" form.get('password')['errors']['minlength']"> Must containt 8 symbols
+                </span>
+                <span class="text-warning" *ngIf="form.get('password')['errors']['required']"> Password can't be empty
+                </span>
+            </small>
+        </div>
+
+        <div class="form-group">
+            <input class="mr-2" type="checkbox" id="remember" (change)="rememberMe()">
+            <label for="remember"> Remebmer Me</label>
+        </div>
     </div>
 
-    <div class="form-group">
-      <input class="mr-2" type="checkbox" id="remember" (change)="rememberMe()">
-      <label for="remember"> Remebmer Me</label>
+    <div class="d-flex flex-column">
+        <button class="btn btn-primary" [disabled]="form.invalid" type="submit"> Login </button>
+        <a [routerLink]="['/registration']" routerLinkActive="router-link-active"> Do not have an account? </a>
     </div>
-  </div>
-
-  <div class="d-flex flex-column">
-    <button class="btn btn-primary" [disabled]="form.invalid" type="submit"> Login </button>
-    <a [routerLink]="['/registration']" routerLinkActive="router-link-active"> Do not have an account? </a>
-  </div>
 </form>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Login
+        </mat-card-title>
+    </mat-card-header>
+</mat-card>
