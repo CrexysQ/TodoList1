@@ -6,7 +6,6 @@ import { AuthorizationModule } from './components/authorization/authorization.mo
 
 import { AppComponent } from './app.component';
 
-import { SetThemeService } from '../app/shared/services/set-theme.serivice';
 import { TimerService } from '../app/shared/services/timer.service';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './shared/services/users.service';
@@ -33,7 +32,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     BrowserAnimationsModule,
     CollapseModule.forRoot()
   ],
-  providers: [SetThemeService, TimerService, UserService, AuthGuard],
+  providers: [TimerService, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

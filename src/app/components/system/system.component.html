@@ -3,12 +3,16 @@
     <div class="col-md-1">
       <app-aside-nav></app-aside-nav>
     </div>
-    <div class="col-md-9 main-content">
+    <div class="col-md-11 main-content">
       <app-header></app-header>
-      <router-outlet></router-outlet>
-    </div>
-    <div class="col-md-2">
-      <app-right-aside ></app-right-aside>
+      <div class="row">
+        <div class="col-md-10">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="col-md-2">
+          <app-right-aside ></app-right-aside>
+        </div>
+      </div>
     </div>
   </div>
 </div>

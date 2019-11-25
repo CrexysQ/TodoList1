@@ -1,25 +1,14 @@
-<header>
-    <div class="pl-0 col-md-4">
-      <div class="active-task card">
-      <div class="task-time">
-          <p class="hours"> {{ hours }} </p>
-          <span> : </span>
-          <p class="minutes"> {{ minutes }} </p>
-      </div>
-      <h5 class="task-name">{{ task }}</h5>
-    </div>
-    </div>
-    <div class="col-md-2 p-0">
-      <div class="theme-picker position-relative card" (mouseenter)="dropDownOpen()" (mouseleave)="dropDownHidden()" >
-        <span> PICK A THEME </span>
-        <div class="theme-dropDown" [@dropDown]="dropDownState">
-          <span class="current-theme">{{ choice }}</span>
-          <span class="theme" (click)="onChange('Light')"> Light </span>
-          <span class="theme" (click)="onChange('Dark')"> Dark </span>
-          <span class="theme" (click)="onChange('Red')"> Red </span>
+<header class="row">
+    <div class="pl-0 col-md-4 white-bg">
+        <div class="active-task card">
+            <div class="task-time">
+                <p class="hours"> {{ hours }} </p>
+                <span> : </span>
+                <p class="minutes"> {{ minutes }} </p>
+            </div>
+            <h5 class="task-name">{{ task }}</h5>
         </div>
-      </div>
     </div>
 
-  <button class="logout-btn" (click)="logOut()">LogOut</button>
+    <button class="logout-btn" (click)="logOut()">LogOut</button>
 </header>

@@ -7,6 +7,5 @@ export interface User {
   name: string;
   password: string;
   tasks?: Task[];
-  theme?: string;
   time?: Time;
 }

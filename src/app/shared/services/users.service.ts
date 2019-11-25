@@ -70,7 +70,6 @@ export class UserService implements OnDestroy {
       name: userName,
       id: userId,
       tasks: [],
-      theme: '',
       time: {
         hours: 0,
         minutes: 0

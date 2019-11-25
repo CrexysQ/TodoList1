@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SetThemeService } from 'src/app/shared/services/set-theme.serivice';
 
 @Component ({
   selector: 'app-system',
@@ -8,5 +7,5 @@ import { SetThemeService } from 'src/app/shared/services/set-theme.serivice';
 })
 
 export class SystemComponent  {
-  constructor(public themeService: SetThemeService) { }
+  constructor() { }
 }
